@@ -1,30 +1,19 @@
 /* Burger*/
-(function () {
-    const burgerItem = document.querySelector(".header__burger");
-    const menu = document.querySelector(".header__nav");
-    const menuClose = document.querySelector(".burger__nav-close");
-    const menuLinks = document.querySelectorAll(".header__link");
-    const menu1 = document.querySelector(".main");
-    
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("burger").addEventListener("click", function() 
+    {
+        document.querySelector(".header__wrapper").classList.toggle("open");
+        document.querySelector("body").classList.toggle("noscroll__nav")
+    })
+})
 
-    burgerItem.addEventListener('click', () => {
-        menu.classList.add("header__nav_active");
-    });
-    menuClose.addEventListener('click', () => {
-        menu.classList.remove("header__nav_active");
-    });
-    if (window.innerWidth <= 768) {
-        for (let i = 0; i < menuLinks.length; i +=1) {
-            menuLinks[i].addEventListener("click", () => {
-                menu.classList.remove("header__nav_active");  
-            });
-        }
-    }
-    menu.addEventListener('click', () => {
-        menu.classList.remove("header__nav_active");
-    });
-    menu1.addEventListener('click', () => {
-        menu.classList.remove("header__nav_active");
-    });
-    
-}());
+
+document.getElementById("burger").addEventListener('click', event => {
+    event._isClickWithInMenu = true;
+});
+document.body.addEventListener('click', event => {
+    if (event._isClickWithInMenu) return;
+    // Действие при клике
+    document.querySelector(".header__wrapper").classList.remove("open");
+    document.querySelector("body").classList.remove("noscroll__nav")
+});
